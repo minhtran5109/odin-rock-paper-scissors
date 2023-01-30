@@ -59,19 +59,32 @@ function checkWinner(pScore, cScore) {
 }
 
 function game() {
-  for (let i = 0; i < 5; i++) {
-    console.log("Round " + (i+1));
-    playerChoice = prompt("Rock, Paper or Scissors", "Rock");
-    playerChoice = handlePlayerChoice(playerChoice);
-    computerChoice = getComputerChoice();
-    console.log("You: " + playerChoice);
-    console.log("Computer: " + computerChoice);
-    console.log(playRound(playerChoice, computerChoice));
+  // for (let i = 0; i < 5; i++) {
+  //   console.log("Round " + (i+1));
+  //   playerChoice = prompt("Rock, Paper or Scissors", "Rock");
+  //   playerChoice = handlePlayerChoice(playerChoice);
+  //   computerChoice = getComputerChoice();
+  //   console.log("You: " + playerChoice);
+  //   console.log("Computer: " + computerChoice);
+  //   console.log(playRound(playerChoice, computerChoice));
 
-    // TODO: added score, valid input check, play more rounds
-  }
-  console.log(`Final Score: You ${playerScore} - ${computerScore} Computer`);
-  console.log(checkWinner(playerScore, computerScore));
+  //   // TODO: added score, valid input check, play more rounds
+  // }
+  // console.log(`Final Score: You ${playerScore} - ${computerScore} Computer`);
+  // console.log(checkWinner(playerScore, computerScore));
+
+  let buttons = document.querySelectorAll(".btn-choice");
+  buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+      playerChoice = button.id;
+      console.log(playerChoice);
+      computerChoice = getComputerChoice();
+      console.log("You: " + playerChoice);
+      console.log("Computer: " + computerChoice);
+      console.log(playRound(playerChoice, computerChoice));
+    });
+  });
+
 }
 
 game();
