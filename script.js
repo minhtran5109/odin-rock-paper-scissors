@@ -75,23 +75,23 @@ function game() {
 
   let resultDiv = document.querySelector("#result");
   let buttons = document.querySelectorAll(".btn-choice");
-  let round = 1;
   buttons.forEach((button) => {
     button.addEventListener('click', () => {
       playerChoice = button.id;
       computerChoice = getComputerChoice();
-      let result = `Round ${round}. ` + `You: ${playerChoice}, `
+      let result = `You: ${playerChoice}, `
       + `Computer: ${computerChoice}. `
       + playRound(playerChoice, computerChoice);
       let roundResult = document.createElement('div');
       roundResult.textContent = result;
       resultDiv.appendChild(roundResult);
-      round++;
       if (playerScore === 5 || computerScore === 5) {
         let finalScore = document.createElement('div');
         finalScore.textContent = `Final Score: You ${playerScore} - ${computerScore} Computer. \n` 
         + checkWinner(playerScore, computerScore);
         resultDiv.appendChild(finalScore);
+        playerScore = 0;
+        computerScore = 0;
       }
     });
   });
