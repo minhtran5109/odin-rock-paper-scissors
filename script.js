@@ -49,9 +49,9 @@ function handlePlayerChoice(playerString) {
 }
 
 function checkWinner(pScore, cScore) {
-  if (pScore > cScore) {
+  if (pScore === 5 && pScore > cScore) {
     return "Victory! You beats the computer."
-  } else if (pScore < cScore) {
+  } else if (cScore === 5 && cScore > pScore) {
     return "Defeated! Better luck next time."
   } else {
     return "Draw!"
@@ -73,15 +73,26 @@ function game() {
   // console.log(`Final Score: You ${playerScore} - ${computerScore} Computer`);
   // console.log(checkWinner(playerScore, computerScore));
 
+  let resultDiv = document.querySelector("#result");
   let buttons = document.querySelectorAll(".btn-choice");
+  let round = 1;
   buttons.forEach((button) => {
     button.addEventListener('click', () => {
       playerChoice = button.id;
-      console.log(playerChoice);
       computerChoice = getComputerChoice();
-      console.log("You: " + playerChoice);
-      console.log("Computer: " + computerChoice);
-      console.log(playRound(playerChoice, computerChoice));
+      let result = `Round ${round}. ` + `You: ${playerChoice}, `
+      + `Computer: ${computerChoice}. `
+      + playRound(playerChoice, computerChoice);
+      let roundResult = document.createElement('div');
+      roundResult.textContent = result;
+      resultDiv.appendChild(roundResult);
+      round++;
+      if (playerScore === 5 || computerScore === 5) {
+        let finalScore = document.createElement('div');
+        finalScore.textContent = `Final Score: You ${playerScore} - ${computerScore} Computer. \n` 
+        + checkWinner(playerScore, computerScore);
+        resultDiv.appendChild(finalScore);
+      }
     });
   });
 
